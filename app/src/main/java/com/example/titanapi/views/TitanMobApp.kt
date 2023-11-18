@@ -5,14 +5,15 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.titanapi.ui.theme.AppBg
 
 
 @Composable
-fun LoginFormView() {
+fun TitanMobApp() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.Gray
+        color = AppBg
     ) {
-
+        LoginFormView()
     }
 }

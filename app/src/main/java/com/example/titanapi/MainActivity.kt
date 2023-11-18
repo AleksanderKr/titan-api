@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.titanapi.data.LoginApi
 import com.example.titanapi.data.LoginData
 import com.example.titanapi.data.UserData
 import com.example.titanapi.di.UserModule
-import com.example.titanapi.views.LoginFormView
+import com.example.titanapi.views.TitanMobApp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : ComponentActivity() {
     private val loginApi = UserModule.provideLoginApi()
@@ -24,14 +21,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            LoginFormView()
-        }
-        setContentView(R.layout.activity_main)
-
-        getAllComments()
+            TitanMobApp()
         }
 
-    private fun getAllComments() {
+        //sendLoginRequest()
+        }
+
+    private fun sendLoginRequest() {
         val api = UserModule.provideLoginApi()
 
         val logData = LoginData("titan", "titan123")
