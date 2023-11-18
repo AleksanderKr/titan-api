@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.example.titanapi.R
 import com.example.titanapi.ui.theme.FormBg
+import com.example.titanapi.ui.theme.FormBorder
 import com.example.titanapi.ui.theme.compShapes
 
 
@@ -41,10 +42,10 @@ fun PasswordInputField(labelValue: String, painterRes: Painter) {
             .clip(compShapes.large),
         label = { Text(text = labelValue) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = FormBg,
-            focusedLabelColor = FormBg,
-            cursorColor = FormBg
-
+            focusedBorderColor = FormBorder,
+            focusedLabelColor = FormBorder,
+            cursorColor = FormBorder,
+            backgroundColor = FormBg
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         value = password.value,

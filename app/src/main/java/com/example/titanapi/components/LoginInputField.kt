@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import com.example.titanapi.ui.theme.FormBg
+import com.example.titanapi.ui.theme.FormBorder
 import com.example.titanapi.ui.theme.compShapes
 
 
@@ -29,10 +30,10 @@ fun LoginInputField(labelValue: String, painterRes: Painter) {
             .clip(compShapes.large),
         label = {Text(text = labelValue)},
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = FormBg,
-            focusedLabelColor = FormBg,
-            cursorColor = FormBg
-
+            focusedBorderColor = FormBorder,
+            focusedLabelColor = FormBorder,
+            cursorColor = FormBorder,
+            backgroundColor = FormBg
         ),
         keyboardOptions = KeyboardOptions.Default,
         value = textValue.value,
