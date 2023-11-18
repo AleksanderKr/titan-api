@@ -2,6 +2,7 @@ package com.example.titanapi.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,12 +27,14 @@ fun LoginButton(value: String) {
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),
-        colors = ButtonDefaults.buttonColors(Color.Transparent)
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        contentPadding = PaddingValues(),
+        shape = RoundedCornerShape(50.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(48.dp)
+                .heightIn(64.dp)
                 .background(
                     brush = Brush.horizontalGradient(listOf(Pink40, Purple40)),
                     shape = RoundedCornerShape(50.dp)

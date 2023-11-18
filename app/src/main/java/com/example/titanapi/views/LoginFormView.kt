@@ -45,6 +45,8 @@ fun LoginFormView() {
                 painterResource(id = R.drawable.baseline_lock_open_20)
             )
 
+            Spacer(modifier = Modifier.height(80.dp))
+            
             LoginButton(value = stringResource(id = R.string.sign_in))
         }
     }
