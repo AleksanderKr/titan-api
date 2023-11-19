@@ -1,6 +1,7 @@
 package com.example.titanapi.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -20,10 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import com.example.titanapi.R
 import com.example.titanapi.ui.theme.FormBg
 import com.example.titanapi.ui.theme.FormBorder
-import com.example.titanapi.ui.theme.compShapes
 
 
 @Composable
@@ -39,7 +40,7 @@ fun PasswordInputField(labelValue: String, painterRes: Painter) {
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(compShapes.large),
+            .clip(RoundedCornerShape(4.dp)),
         label = { Text(text = labelValue) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = FormBorder,

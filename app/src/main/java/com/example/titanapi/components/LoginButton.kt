@@ -17,13 +17,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.ui.theme.Pink40
 import com.example.titanapi.ui.theme.Purple40
 
 @Composable
 fun LoginButton(value: String) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            RequestLogin.sendLoginRequest()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),

@@ -1,6 +1,7 @@
 package com.example.titanapi.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
@@ -12,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 import com.example.titanapi.ui.theme.FormBg
 import com.example.titanapi.ui.theme.FormBorder
-import com.example.titanapi.ui.theme.compShapes
 
 
 @Composable
@@ -27,7 +28,7 @@ fun LoginInputField(labelValue: String, painterRes: Painter) {
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(compShapes.large),
+            .clip(RoundedCornerShape(4.dp)),
         label = {Text(text = labelValue)},
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = FormBorder,
