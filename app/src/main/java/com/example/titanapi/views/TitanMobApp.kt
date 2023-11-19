@@ -23,7 +23,7 @@ fun TitanMobApp() {
                     LoginFormView()
                 }
                 is View.CameraView -> {
-                    //CameraView()
+                    CameraView()
                 }
             }
         }
