@@ -28,7 +28,11 @@ import com.example.titanapi.ui.theme.FormBorder
 
 
 @Composable
-fun PasswordInputField(labelValue: String, painterRes: Painter) {
+fun PasswordInputField(
+    labelValue: String,
+    painterRes: Painter,
+    onChange: (String) -> Unit
+) {
 
     val password = remember {
         mutableStateOf("")
@@ -51,6 +55,7 @@ fun PasswordInputField(labelValue: String, painterRes: Painter) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         value = password.value,
         onValueChange = {
+            onChange(it)
             password.value = it
         },
         leadingIcon = {

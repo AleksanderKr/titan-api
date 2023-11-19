@@ -1,5 +1,6 @@
 package com.example.titanapi.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,6 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -22,10 +24,14 @@ import com.example.titanapi.ui.theme.Pink40
 import com.example.titanapi.ui.theme.Purple40
 
 @Composable
-fun LoginButton(value: String) {
+fun LoginButton(
+    value: String,
+    identifier: MutableState<String>,
+    password: MutableState<String>,
+) {
     Button(
         onClick = {
-            RequestLogin.sendLoginRequest()
+            RequestLogin.sendLoginRequest(identifier.value, password.value)
         },
         modifier = Modifier
             .fillMaxWidth()

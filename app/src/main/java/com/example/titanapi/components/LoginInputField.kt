@@ -19,7 +19,11 @@ import com.example.titanapi.ui.theme.FormBorder
 
 
 @Composable
-fun LoginInputField(labelValue: String, painterRes: Painter) {
+fun LoginInputField(
+    labelValue: String,
+    painterRes: Painter,
+    onChange: (String) -> Unit
+) {
 
     val textValue = remember {
         mutableStateOf("")
@@ -39,6 +43,7 @@ fun LoginInputField(labelValue: String, painterRes: Painter) {
         keyboardOptions = KeyboardOptions.Default,
         value = textValue.value,
         onValueChange = {
+            onChange(it)
             textValue.value = it
         },
         leadingIcon = {
