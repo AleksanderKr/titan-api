@@ -1,6 +1,6 @@
 package com.example.titanapi.data
 
-data class LoginData (
+data class LoginData(
     val identifier: String,
     val password: String
 )
