@@ -3,7 +3,9 @@ package com.example.titanapi.controllers
 import android.util.Log
 import com.example.titanapi.data.LoginData
 import com.example.titanapi.data.UserData
+import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.UserModule
+import com.example.titanapi.di.View
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +23,8 @@ object RequestLogin {
                 access_token = response.body()?.accessToken.toString()
                 refresh_token = response.body()?.refreshToken.toString()
                 Log.d("TAG", access_token)
+
+                //TitanMobAppRouter.routeTo(View.CameraView)
             }
         }
 
