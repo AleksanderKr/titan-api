@@ -16,7 +16,7 @@ import com.example.titanapi.ui.theme.AppBg
 @Composable
 fun CameraView() {
     Surface(
-        color = AppBg,z
+        color = AppBg,
         modifier = Modifier
             .fillMaxSize()
             .background(AppBg)
