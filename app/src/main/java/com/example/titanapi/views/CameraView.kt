@@ -12,16 +12,14 @@ import androidx.compose.ui.unit.dp
 import com.example.titanapi.components.MainHeaderComponent
 import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.ui.theme.AppBg
-import com.example.titanapi.ui.theme.Pink40
-import com.example.titanapi.ui.theme.Pink80
 
 @Composable
 fun CameraView() {
     Surface(
-        color = Pink40,
+        color = AppBg,z
         modifier = Modifier
             .fillMaxSize()
-            .background(Pink80)
+            .background(AppBg)
             .padding(28.dp)) {
     }
     Log.d("TAG","CAMERAVIEW "+ RequestLogin.logged_user.toString())
