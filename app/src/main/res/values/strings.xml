@@ -7,4 +7,6 @@
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
     <string name="sign_in">Sign in</string>
+    <string name="pick_photo">Pick a photo</string>
+    <string name="take_photo">Take a photo</string>
 </resources>
