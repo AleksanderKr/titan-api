@@ -9,4 +9,5 @@
     <string name="sign_in">Sign in</string>
     <string name="pick_photo">Pick a photo</string>
     <string name="take_photo">Take a photo</string>
+    <string name="add_photo">Add a photo by tapping the window</string>
 </resources>

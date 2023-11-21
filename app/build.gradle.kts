@@ -83,7 +83,10 @@ dependencies {
     implementation("androidx.camera:camera-video:1.3.0")
     implementation("androidx.camera:camera-extensions:1.3.0")
 
+    // image loading
     implementation("io.coil-kt:coil-compose:2.1.0")
+    // image cropping
+    implementation("com.vanniktech:android-image-cropper:4.3.3")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
