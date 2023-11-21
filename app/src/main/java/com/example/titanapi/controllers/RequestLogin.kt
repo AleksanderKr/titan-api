@@ -38,7 +38,7 @@ object RequestLogin {
 
                     logged_user = UserData(refresh_token, UserData.User(user_id, username, user_email, user_role), access_token)
                 Log.d("TAG", "authorized")
-                TitanMobAppRouter.routeTo(View.CameraView)
+                TitanMobAppRouter.routeTo(View.CameraViewObj)
             }
                 else {
                     Log.d("TAG", "Unauthorized")

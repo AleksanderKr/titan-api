@@ -7,4 +7,7 @@
     <string name="hide_password">Ukryj hasło</string>
     <string name="show_password">Pokaż hasło</string>
     <string name="sign_in">Zaloguj</string>
+    <string name="pick_photo">Wybierz zdjęcie</string>
+    <string name="take_photo">Zrób zdjęcie</string>
+    <string name="add_photo">Dodaj zdjęcie wybierając poniższe okno</string>
 </resources>

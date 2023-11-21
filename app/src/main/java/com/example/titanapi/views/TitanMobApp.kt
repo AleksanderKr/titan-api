@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
@@ -19,10 +18,10 @@ fun TitanMobApp() {
     ) {
         Crossfade(targetState = TitanMobAppRouter.currentView, label = "") { currentState ->
             when(currentState.value) {
-                is View.LoginView -> {
+                is View.LoginViewObj -> {
                     LoginFormView()
                 }
-                is View.CameraView -> {
+                is View.CameraViewObj -> {
                     CameraView()
                 }
             }
