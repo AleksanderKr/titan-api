@@ -5,26 +5,25 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,14 +38,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.canhub.cropper.CropImage.CancelledResult.uriContent
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.example.titanapi.R
 import com.example.titanapi.components.MainHeaderComponent
-import com.example.titanapi.controllers.RequestLogin
+import com.example.titanapi.di.TitanMobAppRouter
+import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
 
 @Composable
@@ -67,17 +66,69 @@ fun CameraView() {
     var imageBitmap by remember {
         mutableStateOf<Bitmap?>(null)
     }
+    var hasProcessedArray by remember { mutableStateOf(false) }
 
-    val photoPickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri -> selectedImageUri = uri })
     val imgCropLauncher = rememberLauncherForActivityResult(
         contract = CropImageContract(),
         onResult = { cropResult -> selectedImageUri = cropResult.uriContent })
 
     if (selectedImageUri != null) {
         val imageSource = ImageDecoder.createSource(localContext.contentResolver, selectedImageUri!!)
-        imageBitmap = ImageDecoder.decodeBitmap(imageSource)
+        imageBitmap = ImageDecoder.decodeBitmap(
+            imageSource
+        ) { imageDecoder: ImageDecoder, _: ImageDecoder.ImageInfo?, _: ImageDecoder.Source? ->
+            imageDecoder.isMutableRequired = true
+        }
+
+        val bitmapWidth: Int = imageBitmap!!.width
+        val bitmapHeight: Int = imageBitmap!!.height
+        val pixels = IntArray(bitmapHeight * bitmapWidth)
+
+        imageBitmap!!.getPixels(pixels, 0, bitmapWidth, 0, 0, bitmapWidth, bitmapHeight)
+
+        val minValue = pixels.minOrNull() ?: 0 // Minimum value in the 'pixels' array
+        val maxValue = pixels.maxOrNull() ?: 255 // Maximum value in the 'pixels' array
+
+        val targetMinValue = -139 // Define the target minimum value after normalization
+        val targetMaxValue = 260 // Define the target maximum value after normalization
+
+        val combinedRGBArray = IntArray(pixels.size)
+        if (!hasProcessedArray) {
+            for (i in pixels.indices) {
+                val pixelValue = pixels[i]
+
+                // Normalize the pixel value to the desired range (-139 to 260)
+                val normalizedValue = ((pixelValue - minValue).toFloat() / (maxValue - minValue) *
+                        (targetMaxValue - targetMinValue) + targetMinValue).toInt()
+
+                // Ensure the normalized value stays within the specified range
+                combinedRGBArray[i] = normalizedValue.coerceIn(targetMinValue, targetMaxValue)
+            }
+            hasProcessedArray = true
+        }
+
+        LaunchedEffect(hasProcessedArray) {
+            if (hasProcessedArray) {
+                val chunkSize = 100 // Adjust the chunk size as needed
+                val arraySize = combinedRGBArray.size
+
+                var startPos = 0
+                while (startPos < arraySize) {
+                    val endPos = (startPos + chunkSize).coerceAtMost(arraySize)
+                    val chunk = combinedRGBArray.copyOfRange(startPos, endPos)
+                    println(chunk.contentToString())
+                    startPos += chunkSize
+                }
+
+            }
+        }
+        // koniec pobierania pikseli
+        // skalowanie pikseli do -139-260
+
+
+
+
+
     }
 
     Column(
@@ -117,64 +168,37 @@ fun CameraView() {
                     .clickable {
                         val cropOptions = CropImageContractOptions(uriContent, CropImageOptions())
                         cropOptions
-                            .setFixAspectRatio(true)
-                            .setMaxCropResultSize(512, 512)
-                            .setMinCropResultSize(512, 512)
+                            .setMaxCropResultSize(130, 130)
+                            .setMinCropResultSize(130, 130)
                         imgCropLauncher.launch(cropOptions)
                     }
             )
         }
+
+        CamDebugSwitchButton()
+
+
     }
-
-
-    /*
-    LazyColumn(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                Button(onClick = {
-                    photoPickerLauncher.launch(
-                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    )
-                }) {
-                    Text(text = stringResource(id = R.string.pick_photo))
-                }
-                Button(onClick = {
-
-                }) {
-                    Text(text = stringResource(id = R.string.take_photo))
-                }
-            }
-        }
-
-        item {
-            AsyncImage(
-                model = selectedImageUri,
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(40.dp),
-                contentScale = ContentScale.Crop)
-        }
-        item {
-            Button(onClick = {
-
-                },
-                modifier= Modifier.padding(40.dp
-                )) {
-
-                    Text(text = stringResource(id = R.string.take_photo))
-            }
-        }
-    }*/
 }
 
 @Preview
 @Composable
 fun CameraViewPreview() {
     CameraView()
+}
+
+@Composable
+fun CamDebugSwitchButton() {
+    Button(
+        onClick = {
+            TitanMobAppRouter.routeTo(View.LoginViewObj)
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        colors = ButtonDefaults.buttonColors(Color.Red),
+        contentPadding = PaddingValues(),
+    ) {
+
+    }
 }

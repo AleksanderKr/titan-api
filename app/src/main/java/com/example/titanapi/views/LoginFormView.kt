@@ -3,15 +3,23 @@ package com.example.titanapi.views
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +30,8 @@ import com.example.titanapi.components.LoginInputField
 import com.example.titanapi.components.MainHeaderComponent
 import com.example.titanapi.components.PasswordInputField
 import com.example.titanapi.controllers.RequestLogin
+import com.example.titanapi.di.TitanMobAppRouter
+import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
 
 @Composable
@@ -65,6 +75,7 @@ fun LoginFormView() {
                 identifier = idInput,
                 password = passInput,
             )
+            DebugSwitchButton()
         }
     }
 
@@ -74,4 +85,18 @@ fun LoginFormView() {
 @Composable
 fun DefaultPreviewOfLoginForm() {
     LoginFormView()
+}
+
+@Composable
+fun DebugSwitchButton() {
+    Button(onClick = {
+        TitanMobAppRouter.routeTo(View.CameraViewObj)
+    },
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        colors = ButtonDefaults.buttonColors(Color.Red),
+        contentPadding = PaddingValues(),) {
+
+    }
 }

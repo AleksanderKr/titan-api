@@ -2,9 +2,11 @@ package com.example.titanapi.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -20,13 +22,14 @@ fun MainHeaderComponent(value: String) {
         text = value,
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 80.dp),
+            .heightIn(min = 80.dp)
+            .padding(24.dp),
         style = TextStyle(
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Normal,
+            fontSize = 64.sp,
+            fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Normal
         ),
-        color = colorResource(id = R.color.white),
+        color = Color.DarkGray,
         textAlign = TextAlign.Center
     )
 }

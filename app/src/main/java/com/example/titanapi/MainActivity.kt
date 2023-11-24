@@ -14,8 +14,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //TitanMobApp()
-            CameraView()
+            TitanMobApp()
+            //CameraView()
         }
 
     }
