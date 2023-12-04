@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.titanapi.data.LoginData
 import com.example.titanapi.data.UserData
 import com.example.titanapi.di.TitanMobAppRouter
-import com.example.titanapi.di.UserModule
+import com.example.titanapi.di.ApiProvider
 import com.example.titanapi.di.View
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,7 +12,7 @@ import retrofit2.Response
 
 
 object RequestLogin {
-    private val api = UserModule.provideLoginApi()
+    private val api = ApiProvider.provideLoginApi()
     private var log_data = LoginData("","")
     var logged_user = UserData("",UserData.User(0,"","",0),"")
 
@@ -37,7 +37,7 @@ object RequestLogin {
                     user_role = response.body()?.user!!.roleId
 
                     logged_user = UserData(refresh_token, UserData.User(user_id, username, user_email, user_role), access_token)
-                Log.d("TAG", "authorized")
+
                 TitanMobAppRouter.routeTo(View.CameraViewObj)
             }
                 else {

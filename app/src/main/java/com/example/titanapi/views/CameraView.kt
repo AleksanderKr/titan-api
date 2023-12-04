@@ -44,6 +44,7 @@ import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.example.titanapi.R
 import com.example.titanapi.components.MainHeaderComponent
+import com.example.titanapi.components.SubHeaderComponent
 import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
@@ -122,12 +123,6 @@ fun CameraView() {
 
             }
         }
-        // koniec pobierania pikseli
-        // skalowanie pikseli do -139-260
-
-
-
-
 
     }
 
@@ -137,7 +132,7 @@ fun CameraView() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        MainHeaderComponent(value = stringResource(id = R.string.add_photo))
+        SubHeaderComponent(value = stringResource(id = R.string.add_photo))
         Spacer(modifier = Modifier.height(20.dp))
 
         if (imageBitmap != null) {
@@ -170,6 +165,8 @@ fun CameraView() {
                         cropOptions
                             .setMaxCropResultSize(130, 130)
                             .setMinCropResultSize(130, 130)
+                            .setAllowFlipping(false)
+                            .setAllowRotation(false)
                         imgCropLauncher.launch(cropOptions)
                     }
             )
