@@ -43,8 +43,10 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.example.titanapi.R
-import com.example.titanapi.components.MainHeaderComponent
+import com.example.titanapi.components.SendButton
 import com.example.titanapi.components.SubHeaderComponent
+import com.example.titanapi.controllers.RequestImage
+import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
@@ -58,7 +60,6 @@ fun CameraView() {
             .background(AppBg)
             .padding(28.dp)) {
     }
-    //Log.d("TAG","CAMERAVIEW "+ RequestLogin.logged_user.toString())
 
     val localContext = LocalContext.current
     var selectedImageUri by remember {
@@ -67,11 +68,14 @@ fun CameraView() {
     var imageBitmap by remember {
         mutableStateOf<Bitmap?>(null)
     }
-    var hasProcessedArray by remember { mutableStateOf(false) }
+    var hasProcessedArray by remember {
+        mutableStateOf(false)
+    }
 
     val imgCropLauncher = rememberLauncherForActivityResult(
         contract = CropImageContract(),
         onResult = { cropResult -> selectedImageUri = cropResult.uriContent })
+
 
     if (selectedImageUri != null) {
         val imageSource = ImageDecoder.createSource(localContext.contentResolver, selectedImageUri!!)
@@ -87,22 +91,19 @@ fun CameraView() {
 
         imageBitmap!!.getPixels(pixels, 0, bitmapWidth, 0, 0, bitmapWidth, bitmapHeight)
 
-        val minValue = pixels.minOrNull() ?: 0 // Minimum value in the 'pixels' array
-        val maxValue = pixels.maxOrNull() ?: 255 // Maximum value in the 'pixels' array
-
-        val targetMinValue = -139 // Define the target minimum value after normalization
-        val targetMaxValue = 260 // Define the target maximum value after normalization
+        val minValue = pixels.minOrNull() ?: 0
+        val maxValue = pixels.maxOrNull() ?: 255
+        val targetMinValue = -139
+        val targetMaxValue = 260
 
         val combinedRGBArray = IntArray(pixels.size)
         if (!hasProcessedArray) {
             for (i in pixels.indices) {
                 val pixelValue = pixels[i]
 
-                // Normalize the pixel value to the desired range (-139 to 260)
                 val normalizedValue = ((pixelValue - minValue).toFloat() / (maxValue - minValue) *
                         (targetMaxValue - targetMinValue) + targetMinValue).toInt()
 
-                // Ensure the normalized value stays within the specified range
                 combinedRGBArray[i] = normalizedValue.coerceIn(targetMinValue, targetMaxValue)
             }
             hasProcessedArray = true
@@ -110,17 +111,9 @@ fun CameraView() {
 
         LaunchedEffect(hasProcessedArray) {
             if (hasProcessedArray) {
-                val chunkSize = 100 // Adjust the chunk size as needed
-                val arraySize = combinedRGBArray.size
-
-                var startPos = 0
-                while (startPos < arraySize) {
-                    val endPos = (startPos + chunkSize).coerceAtMost(arraySize)
-                    val chunk = combinedRGBArray.copyOfRange(startPos, endPos)
-                    println(chunk.contentToString())
-                    startPos += chunkSize
-                }
-
+                //pixelArray.value = combinedRGBArray?.copyOf()
+                RequestImage.sendImageRequest(combinedRGBArray)
+                Log.d("dd", "${RequestImage.responseDataDTO.data?.predictions?.firstOrNull()?.result?.benign_prob}")
             }
         }
 

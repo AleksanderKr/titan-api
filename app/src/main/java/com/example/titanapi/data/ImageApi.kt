@@ -1,21 +1,22 @@
 package com.example.titanapi.data
 
 
+import com.google.gson.JsonElement
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
 interface ImageApi {
 
     @POST("/api/pipeline")
-    fun sendImage(@Body imageData: ImageData): Call<ApiResponse>
+    fun sendImage(
+        @Body imageData: ImageData,
+        @Header("Authorization") token: String
+        ): Call<ApiResponse>
 
     companion object {
-        const val BASE_URL = "http://10.0.2.2:3000"
+        const val BASE_URL = "http://172.27.129.220:3000"
     }
 }

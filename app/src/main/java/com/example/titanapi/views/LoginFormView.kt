@@ -1,6 +1,5 @@
 package com.example.titanapi.views
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Surface
@@ -29,7 +26,6 @@ import com.example.titanapi.components.LoginButton
 import com.example.titanapi.components.LoginInputField
 import com.example.titanapi.components.MainHeaderComponent
 import com.example.titanapi.components.PasswordInputField
-import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
@@ -71,7 +67,7 @@ fun LoginFormView() {
 
             Spacer(modifier = Modifier.height(80.dp))
 
-            LoginButton(value = stringResource(id = R.string.sign_in),
+            LoginButton(label = stringResource(id = R.string.sign_in),
                 identifier = idInput,
                 password = passInput,
             )

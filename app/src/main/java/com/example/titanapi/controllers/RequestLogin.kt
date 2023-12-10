@@ -12,7 +12,7 @@ import retrofit2.Response
 
 
 object RequestLogin {
-    private val api = ApiProvider.provideLoginApi()
+    private val loginApi = ApiProvider.provideLoginApi()
     private var log_data = LoginData("","")
     var logged_user = UserData("",UserData.User(0,"","",0),"")
 
@@ -25,7 +25,7 @@ object RequestLogin {
     fun sendLoginRequest(identifier: String, password: String) {
 
         log_data = LoginData(identifier, password)
-        api.loginUser(log_data).enqueue(object : Callback<UserData> {
+        loginApi.loginUser(log_data).enqueue(object : Callback<UserData> {
 
             override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
                 if (response.isSuccessful) {
@@ -39,16 +39,16 @@ object RequestLogin {
                     logged_user = UserData(refresh_token, UserData.User(user_id, username, user_email, user_role), access_token)
 
                 TitanMobAppRouter.routeTo(View.CameraViewObj)
-            }
-                else {
-                    Log.d("TAG", "Unauthorized")
                 }
-        }
+                    else {
+                        Log.d("TAG", "Unauthorized")
+                    }
+            }
 
-        override fun onFailure(call: Call<UserData>, t: Throwable) {
-            Log.d("TAG", "failed to connect")
-        }
+            override fun onFailure(call: Call<UserData>, t: Throwable) {
+                Log.d("TAG", "failed to connect")
+            }
 
-    })
-}
+        })
+    }
 }
