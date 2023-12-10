@@ -8,15 +8,17 @@ import com.example.titanapi.di.ApiProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.CompletableFuture
 
 
 object RequestImage {
     private val imgApi = ApiProvider.provideImageApi()
     private var sentData = ImageData("", null)
     private val task = "mvp prediction"
-    var responseDataDTO = ApiResponse(null)
+    var responseDAO = ApiResponse(null)
 
-    fun sendImageRequest(pixelArray: IntArray) {
+    fun sendImageRequest(pixelArray: IntArray): CompletableFuture<ApiResponse> {
+        val futureResponse = CompletableFuture<ApiResponse>()
         val pixelData = PixelData(pixelArray, "0")
         val jwt = "Bearer ${RequestLogin.logged_user.accessToken}"
 
@@ -29,19 +31,22 @@ object RequestImage {
                     val respData = response.body()?.data
                     val predictions = respData?.predictions?.firstOrNull()?.result
 
-                    responseDataDTO = ApiResponse(respData)
+                    responseDAO = ApiResponse(respData)
+                    futureResponse.complete(responseDAO)
                 }
                 else {
                     val errorBody = response.errorBody()?.string()
                     Log.e("Response", "Error Body: $errorBody")
+                    futureResponse.complete(null)
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 Log.d("TAG", "Network request failed: ${t.message}")
+                futureResponse.complete(null)
             }
         })
 
-
+        return futureResponse
     }
 }

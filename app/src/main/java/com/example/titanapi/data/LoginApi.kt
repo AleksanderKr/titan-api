@@ -17,6 +17,6 @@ interface LoginApi {
 
     companion object {
 
-        const val BASE_URL = "http://172.27.129.220:3000"
+        const val BASE_URL = "http://172.20.1.165:3000"
     }
 }

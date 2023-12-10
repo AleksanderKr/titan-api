@@ -3,7 +3,6 @@ package com.example.titanapi.views
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -43,10 +42,9 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.example.titanapi.R
-import com.example.titanapi.components.SendButton
+import com.example.titanapi.components.ProbabilityLabel
 import com.example.titanapi.components.SubHeaderComponent
 import com.example.titanapi.controllers.RequestImage
-import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.di.TitanMobAppRouter
 import com.example.titanapi.di.View
 import com.example.titanapi.ui.theme.AppBg
@@ -70,6 +68,12 @@ fun CameraView() {
     }
     var hasProcessedArray by remember {
         mutableStateOf(false)
+    }
+    var benignProbLabel: String? by remember {
+        mutableStateOf(null)
+    }
+    var malignantProbLabel: String? by remember {
+        mutableStateOf(null)
     }
 
     val imgCropLauncher = rememberLauncherForActivityResult(
@@ -111,9 +115,12 @@ fun CameraView() {
 
         LaunchedEffect(hasProcessedArray) {
             if (hasProcessedArray) {
-                //pixelArray.value = combinedRGBArray?.copyOf()
-                RequestImage.sendImageRequest(combinedRGBArray)
-                Log.d("dd", "${RequestImage.responseDataDTO.data?.predictions?.firstOrNull()?.result?.benign_prob}")
+                val futurePredictionResponse = RequestImage.sendImageRequest(combinedRGBArray)
+
+                futurePredictionResponse.thenAcceptAsync { responseData ->
+                    benignProbLabel = responseData.data?.predictions?.firstOrNull()?.result?.benign_prob
+                    malignantProbLabel = responseData.data?.predictions?.firstOrNull()?.result?.malignant_prob
+                }
             }
         }
 
@@ -167,6 +174,13 @@ fun CameraView() {
 
         CamDebugSwitchButton()
 
+        if (!benignProbLabel.isNullOrBlank()) {
+            ProbabilityLabel(value = benignProbLabel)
+        }
+
+        if (!malignantProbLabel.isNullOrBlank()) {
+            ProbabilityLabel(value = malignantProbLabel)
+        }
 
     }
 }
