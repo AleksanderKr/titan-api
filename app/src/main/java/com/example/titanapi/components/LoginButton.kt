@@ -29,6 +29,7 @@ fun LoginButton(
     label: String,
     identifier: MutableState<String>,
     password: MutableState<String>,
+    enabled: Boolean
 ) {
     Button(
         onClick = {
@@ -39,6 +40,7 @@ fun LoginButton(
             .heightIn(48.dp),
         colors = ButtonDefaults.buttonColors(Color.Transparent),
         contentPadding = PaddingValues(),
+        enabled = enabled,
         shape = RoundedCornerShape(50.dp)
     ) {
         Box(

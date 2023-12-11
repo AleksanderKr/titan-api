@@ -21,7 +21,7 @@ fun IconLight() {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(color = Color.Transparent)
-        .padding(40.dp, 480.dp, 40.dp, 30.dp)) {
+        .padding(40.dp, 460.dp, 40.dp, 10.dp)) {
         Image(
             painter = painterResource(id = R.drawable.thelion_light),
             contentDescription = "thelion",

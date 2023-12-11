@@ -17,4 +17,5 @@
     <string name="result">Guz najprawdopodobniej jest\u0020</string>
     <string name="result_benign">łagodny</string>
     <string name="result_malignant">złośliwy</string>
+    <string name="tos">Akceptuję warunki korzystania z usługi</string>
 </resources>
