@@ -26,7 +26,8 @@ fun IconLight() {
             painter = painterResource(id = R.drawable.thelion_light),
             contentDescription = "thelion",
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier.matchParentSize(),
+            alpha = 0.5f
         )
     }
 }

@@ -54,9 +54,10 @@ fun PasswordInputField(
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         value = password.value,
-        onValueChange = {
-            onChange(it)
-            password.value = it
+        onValueChange = {newValue ->
+            val filteredValue = newValue.filter { it.isLetterOrDigit() || it in listOf('_', '@', '#', '!', "?") }
+            onChange(filteredValue)
+            password.value = filteredValue
         },
         leadingIcon = {
             Icon(painter = painterRes, contentDescription = "")

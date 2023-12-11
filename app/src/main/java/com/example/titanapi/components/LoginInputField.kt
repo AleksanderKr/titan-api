@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.titanapi.ui.theme.FormBg
 import com.example.titanapi.ui.theme.FormBorder
@@ -33,18 +34,21 @@ fun LoginInputField(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(4.dp)),
-        label = {Text(text = labelValue)},
+        label = { Text(text = labelValue) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = FormBorder,
             focusedLabelColor = FormBorder,
             cursorColor = FormBorder,
             backgroundColor = FormBg
         ),
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done
+        ),
         value = textValue.value,
-        onValueChange = {
-            onChange(it)
-            textValue.value = it
+        onValueChange = {newValue ->
+            val filteredValue = newValue.filter { it.isLetterOrDigit() || it in listOf('_', '@', '#', '!', "?") }
+            onChange(filteredValue)
+            textValue.value = filteredValue
         },
         leadingIcon = {
             Icon(painter = painterRes, contentDescription = "")

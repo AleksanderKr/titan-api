@@ -14,4 +14,9 @@ val AppBg = Color(0xFFFFFFFF)
 val FormBg = Color(0xFFD4E0F8)
 val FormBorder = Color(0xFF424242)
 
-val TextColor = Color(0xFFF0F0F0)
+val ButtonGrad1 = Color(0xFF565E8B)
+val ButtonGrad2 = Color(0xFF7981AF)
+
+val ImgPlaceBg = Color(0xFFE1E3EE)
+
+val ResultTextColor = Color(0xFF000000)

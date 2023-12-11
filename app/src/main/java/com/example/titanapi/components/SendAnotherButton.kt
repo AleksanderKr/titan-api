@@ -10,7 +10,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -18,21 +17,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.titanapi.controllers.RequestLogin
 import com.example.titanapi.ui.theme.ButtonGrad1
 import com.example.titanapi.ui.theme.ButtonGrad2
-import com.example.titanapi.ui.theme.Pink40
-import com.example.titanapi.ui.theme.Purple40
 
 @Composable
-fun LoginButton(
+fun SendAnotherButton(
     label: String,
-    identifier: MutableState<String>,
-    password: MutableState<String>,
-) {
+    show: String?,
+    ) {
+    if (show == "TITAN") {
     Button(
         onClick = {
-            RequestLogin.sendLoginRequest(identifier.value, password.value)
+            //RequestImage.sendImageRequest(img)
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -59,4 +55,5 @@ fun LoginButton(
             )
         }
     }
+}
 }

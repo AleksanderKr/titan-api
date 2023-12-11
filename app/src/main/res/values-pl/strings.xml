@@ -10,7 +10,11 @@
     <string name="pick_photo">Wybierz zdjęcie</string>
     <string name="take_photo">Zrób zdjęcie</string>
     <string name="add_photo">Dodaj zdjęcie wybierając poniższe okno</string>
-    <string name="send_image">Wyślij zdjęcie</string>
+    <string name="send_image">Wyślij kolejne zdjęcie</string>
     <string name="benign">Prawdopodobieństwo łagodnego:\u0020;</string>
     <string name="malignant">Prawdopobieństwo złośliwego:\u0020;</string>
+    <string name="logout">Wyloguj</string>
+    <string name="result">Guz najprawdopodobniej jest\u0020</string>
+    <string name="result_benign">łagodny</string>
+    <string name="result_malignant">złośliwy</string>
 </resources>
