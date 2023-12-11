@@ -10,7 +10,8 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val AppBg = Color(0xFFE5E9F0)
+val AppBg = Color(0xFFFFFFFF)
 val FormBg = Color(0xFFD4E0F8)
 val FormBorder = Color(0xFF424242)
 
+val TextColor = Color(0xFFF0F0F0)

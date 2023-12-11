@@ -24,7 +24,7 @@ fun ProbabilityLabel(value: String?) {
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 80.dp)
-                .padding(24.dp),
+                .padding(18.dp),
             style = TextStyle(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,

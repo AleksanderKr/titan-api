@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Surface
@@ -56,12 +57,18 @@ fun CameraView() {
         modifier = Modifier
             .fillMaxSize()
             .background(AppBg)
-            .padding(28.dp)) {
+            .padding(10.dp)) {
     }
 
     val localContext = LocalContext.current
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
+    }
+    val st = stringResource(id = R.string.add_photo)
+    val benignPrefix = stringResource(id = R.string.benign)
+    val malignPrefix = stringResource(id = R.string.malignant)
+    var strv: String? by remember {
+        mutableStateOf(st)
     }
     var imageBitmap by remember {
         mutableStateOf<Bitmap?>(null)
@@ -120,68 +127,71 @@ fun CameraView() {
                 futurePredictionResponse.thenAcceptAsync { responseData ->
                     benignProbLabel = responseData.data?.predictions?.firstOrNull()?.result?.benign_prob
                     malignantProbLabel = responseData.data?.predictions?.firstOrNull()?.result?.malignant_prob
+
+                    benignProbLabel = benignProbLabel?.let { formatPercentage(it, benignPrefix) }
+                    malignantProbLabel = malignantProbLabel?.let { formatPercentage(it, malignPrefix) }
+                    strv = "\n"
                 }
             }
         }
 
     }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
-        SubHeaderComponent(value = stringResource(id = R.string.add_photo))
-        Spacer(modifier = Modifier.height(20.dp))
-
-        if (imageBitmap != null) {
-            Image(
-                bitmap = imageBitmap?.asImageBitmap()!!,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .background(Color.Blue)
-                    .size(300.dp)
-                    .border(
-                        width = 1.dp,
-                        color = Color.White
-                    )
-            )
-        } else {
-            Image(
-                painter = painterResource(id = R.drawable.baseline_image_search_24),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .background(Color.LightGray)
-                    .size(300.dp)
-                    .border(
-                        width = 2.dp,
-                        color = Color.DarkGray
-                    )
-                    .clickable {
-                        val cropOptions = CropImageContractOptions(uriContent, CropImageOptions())
-                        cropOptions
-                            .setMaxCropResultSize(130, 130)
-                            .setMinCropResultSize(130, 130)
-                            .setAllowFlipping(false)
-                            .setAllowRotation(false)
-                        imgCropLauncher.launch(cropOptions)
-                    }
-            )
+        item {
+            SubHeaderComponent(value = strv!!)
+            Spacer(modifier = Modifier.height(20.dp))
         }
-
-        CamDebugSwitchButton()
-
-        if (!benignProbLabel.isNullOrBlank()) {
+        item {
+            if (imageBitmap != null) {
+                Image(
+                    bitmap = imageBitmap?.asImageBitmap()!!,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .background(Color.Blue)
+                        .size(300.dp)
+                        .border(
+                            width = 1.dp,
+                            color = Color.White
+                        )
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_image_search_24),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .background(Color.LightGray)
+                        .size(300.dp)
+                        .border(
+                            width = 2.dp,
+                            color = Color.DarkGray
+                        )
+                        .clickable {
+                            val cropOptions = CropImageContractOptions(uriContent, CropImageOptions())
+                            cropOptions
+                                .setMaxCropResultSize(130, 130)
+                                .setMinCropResultSize(130, 130)
+                                .setAllowFlipping(false)
+                                .setAllowRotation(false)
+                            imgCropLauncher.launch(cropOptions)
+                        }
+                )
+            }
+        }
+        item {
+            CamDebugSwitchButton()
+        }
+        item {
             ProbabilityLabel(value = benignProbLabel)
-        }
-
-        if (!malignantProbLabel.isNullOrBlank()) {
             ProbabilityLabel(value = malignantProbLabel)
         }
-
     }
 }
 
@@ -205,4 +215,10 @@ fun CamDebugSwitchButton() {
     ) {
 
     }
+}
+
+fun formatPercentage(input: String, prefix: String = ""): String {
+    val value = input.toDoubleOrNull() ?: return "" // Konwersja ciągu na liczbę, jeśli to możliwe
+    val formattedValue = String.format("%.2f", value * 100) // Przekształcenie liczby na procent z dwoma miejscami po przecinku
+    return "$prefix$formattedValue%" // Dodanie przedrostka do sformatowanej wartości z znakiem procentowym
 }

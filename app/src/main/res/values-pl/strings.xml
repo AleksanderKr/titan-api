@@ -11,4 +11,6 @@
     <string name="take_photo">Zrób zdjęcie</string>
     <string name="add_photo">Dodaj zdjęcie wybierając poniższe okno</string>
     <string name="send_image">Wyślij zdjęcie</string>
+    <string name="benign">Prawdopodobieństwo łagodnego:\u0020;</string>
+    <string name="malignant">Prawdopobieństwo złośliwego:\u0020;</string>
 </resources>
