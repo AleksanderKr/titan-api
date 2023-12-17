@@ -2,11 +2,7 @@ package com.example.titanapi.data
 
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
@@ -19,6 +15,6 @@ interface LoginApi {
     fun logoutUser(@Body logoutData: LogoutData): Call<LogoutResponse>
     companion object {
 
-        const val BASE_URL = "http://172.19.70.170:3000"
+        const val BASE_URL = "http://192.168.137.1:3000"
     }
 }

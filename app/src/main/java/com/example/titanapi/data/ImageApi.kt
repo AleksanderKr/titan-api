@@ -1,7 +1,6 @@
 package com.example.titanapi.data
 
 
-import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -17,6 +16,6 @@ interface ImageApi {
         ): Call<ApiResponse>
 
     companion object {
-        const val BASE_URL = "http://172.19.70.170:3000"
+        const val BASE_URL = "http://192.168.137.1:3000"
     }
 }

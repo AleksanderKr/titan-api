@@ -11,11 +11,13 @@
     <string name="take_photo">Zrób zdjęcie</string>
     <string name="add_photo">Dodaj zdjęcie wybierając poniższe okno</string>
     <string name="send_image">Wyślij kolejne zdjęcie</string>
-    <string name="benign">Prawdopodobieństwo łagodnego:\u0020;</string>
-    <string name="malignant">Prawdopobieństwo złośliwego:\u0020;</string>
+    <string name="benign">Łagodny:\u0020</string>
+    <string name="malignant">Złośliwy:\u0020</string>
     <string name="logout">Wyloguj</string>
     <string name="result">Guz najprawdopodobniej jest\u0020</string>
     <string name="result_benign">łagodny</string>
     <string name="result_malignant">złośliwy</string>
-    <string name="tos">Akceptuję warunki korzystania z usługi</string>
+    <string name="tos1">Akceptuję\u0020</string>
+    <string name="tos2">warunki korzystania z usługi</string>
+    <string name="usage_log">Historia użycia</string>
 </resources>

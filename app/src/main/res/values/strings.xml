@@ -17,5 +17,7 @@
     <string name="result">The tumour is most likely to be\u0020</string>
     <string name="result_benign">benign</string>
     <string name="result_malignant">malignant</string>
-    <string name="tos">I accept the Terms of Service</string>
+    <string name="tos1">I accept the\u0020</string>
+    <string name="tos2">Terms of Service</string>
+    <string name="usage_log">Usage log</string>
 </resources>

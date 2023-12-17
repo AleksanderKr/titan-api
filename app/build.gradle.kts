@@ -47,7 +47,7 @@ android {
         }
     }
     hilt {
-        enableAggregatingTask = true;
+        enableAggregatingTask = true
     }
 }
 
@@ -91,6 +91,10 @@ dependencies {
     // room
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    // gps
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
