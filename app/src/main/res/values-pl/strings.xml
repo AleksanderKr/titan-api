@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">titanApi</string>
+    <string name="main_login_label">TITAN</string>
+    <string name="input_identifier">Identyfikator</string>
+    <string name="password">Hasło</string>
+    <string name="hide_password">Ukryj hasło</string>
+    <string name="show_password">Pokaż hasło</string>
+    <string name="sign_in">Zaloguj</string>
+    <string name="pick_photo">Wybierz zdjęcie</string>
+    <string name="take_photo">Zrób zdjęcie</string>
+    <string name="add_photo">Dodaj zdjęcie wybierając poniższe okno</string>
+    <string name="send_image">Wyślij kolejne zdjęcie</string>
+    <string name="benign">Prawdopodobieństwo łagodnego:\u0020;</string>
+    <string name="malignant">Prawdopobieństwo złośliwego:\u0020;</string>
+    <string name="logout">Wyloguj</string>
+    <string name="result">Guz najprawdopodobniej jest\u0020</string>
+    <string name="result_benign">łagodny</string>
+    <string name="result_malignant">złośliwy</string>
+    <string name="tos">Akceptuję warunki korzystania z usługi</string>
+</resources>

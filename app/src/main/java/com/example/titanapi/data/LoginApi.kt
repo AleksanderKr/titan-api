@@ -15,8 +15,10 @@ interface LoginApi {
     @POST("/api/users/login")
     fun loginUser(@Body loginData: LoginData): Call<UserData>
 
+    @POST("/api/users/logout")
+    fun logoutUser(@Body logoutData: LogoutData): Call<LogoutResponse>
     companion object {
 
-        const val BASE_URL = "http://10.0.2.2:3000"
+        const val BASE_URL = "http://172.19.70.170:3000"
     }
 }

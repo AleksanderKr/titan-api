@@ -1,3 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">titanApi</string>
+    <string name="main_login_label">TITAN</string>
+    <string name="input_identifier">Identifier</string>
+    <string name="password">Password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="pick_photo">Pick a photo</string>
+    <string name="take_photo">Take a photo</string>
+    <string name="add_photo">Add a photo by tapping the window</string>
+    <string name="send_image">Send another image</string>
+    <string name="benign">Benign probability:\u0020</string>
+    <string name="malignant">Malignant probability:\u0020</string>
+    <string name="logout">Log out</string>
+    <string name="result">The tumour is most likely to be\u0020</string>
+    <string name="result_benign">benign</string>
+    <string name="result_malignant">malignant</string>
+    <string name="tos">I accept the Terms of Service</string>
 </resources>
