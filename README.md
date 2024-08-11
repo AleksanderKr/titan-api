@@ -7,7 +7,10 @@ Aplikacja mobilna na systemy Android komunikująca się z API systemu predykcyjn
 
 Prezentacja UI:
 Formularz logowania
+![titan_main](https://github.com/AleksanderKr/titan-api/blob/main/titan_main.JPG)
 
 Wprowadzanie obrazów
+![titan_add_img](https://github.com/AleksanderKr/titan-api/blob/main/titan_add_img.JPG)
 
 Odczyt otrzymanych wyników
+![titan_recv](https://github.com/AleksanderKr/titan-api/blob/main/titan_recv.JPG)
